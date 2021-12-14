@@ -11,9 +11,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 8888;
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const generateRandomString = (length) => {
   let text = "";
