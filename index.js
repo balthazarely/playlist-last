@@ -1,7 +1,7 @@
 require("dotenv").config();
-const epxress = require("express");
+const express = require("express");
 const querystring = require("querystring");
-const app = epxress();
+const app = express();
 const axios = require("axios");
 const path = require("path");
 
