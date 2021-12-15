@@ -13,8 +13,6 @@ import { AnimatePresence, motion } from "framer-motion/dist/es/index";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
-  const [topArtists, setTopArtists] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState(null);
@@ -29,12 +27,6 @@ const Profile = () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
       gContext.logInUser(data);
-
-      const userPlaylists = await getCurrentUserPlaylists();
-      setPlaylists(userPlaylists.data);
-
-      const userTopArtist = await getTopArtists();
-      setTopArtists(userTopArtist.data);
     };
 
     catchErrors(fetchData());

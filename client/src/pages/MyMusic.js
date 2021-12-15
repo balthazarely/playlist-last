@@ -24,9 +24,16 @@ const listItem = {
   show: { opacity: 1 },
 };
 
+const timeRange = [
+  { value: "long_term", name: "Long Term" },
+  { value: "medium_term", name: "Medium Term" },
+  { value: "short_term", name: "Short Term" },
+];
+
 export const MyMusic = () => {
   const [profile, setProfile] = useState(null);
   const [topTracks, setTopTracks] = useState(null);
+  const [sortMusicBy, setSortMusicBy] = useState(timeRange[2].value);
   const gContext = useContext(GlobalContext);
 
   useEffect(() => {
@@ -44,27 +51,41 @@ export const MyMusic = () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
 
-      const userTopTracks = await getTopTracks("short_term", 30);
+      const userTopTracks = await getTopTracks(sortMusicBy, 42);
       setTopTracks(userTopTracks.data);
       console.log(userTopTracks.data);
       gContext.isLoading(false);
     };
 
     catchErrors(fetchData());
-  }, []);
+  }, [sortMusicBy]);
 
   return (
     <PageWrapper>
       <>
-        {!gContext.loading && (
-          <motion.div
-            className="w-full"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 20, opacity: 0 }}
-            transition={{ duration: 0.2, when: "beforeChildren" }}
-          >
+        <motion.div
+          className="w-full "
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{ duration: 0.2, when: "beforeChildren" }}
+        >
+          <div className="flex justify-between flex-col sm:flex-row">
             <div className="font-bold text-3xl ">Top Songs</div>
+            <div class="btn-group mt-4 sm:mt-0">
+              {timeRange.map((term) => (
+                <button
+                  onClick={() => setSortMusicBy(term.value)}
+                  class={`btn  btn-xs ${
+                    sortMusicBy === term.value ? "btn-active" : ""
+                  }`}
+                >
+                  {term.name}
+                </button>
+              ))}
+            </div>
+          </div>
+          {!gContext.loading && (
             <motion.div
               variants={container}
               initial="hidden"
@@ -73,13 +94,17 @@ export const MyMusic = () => {
             >
               {topTracks &&
                 topTracks.items.map((song) => (
-                  <motion.div variants={container} className="w-full">
+                  <motion.div
+                    variants={container}
+                    className="w-full"
+                    key={song.id}
+                  >
                     <GridWrapper song={song} variants={listItem} />
                   </motion.div>
                 ))}
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </motion.div>
         {gContext.loading && (
           <motion.div
             className="w-full"

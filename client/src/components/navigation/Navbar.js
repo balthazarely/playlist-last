@@ -34,14 +34,9 @@ export const Navbar = () => {
       </div>
 
       <div className="flex-1 justify-end ">
-        <Link to="/my-top-songs">
-          <button className="btn b btn-xs btn-outline ">
-            My&nbsp;Top&nbsp;Songs
-          </button>
-        </Link>
         {location.pathname !== "/" && (
           <button
-            className="btn btn-square btn-ghost -mr-2"
+            className="btn btn-square btn-ghost "
             onClick={() => gContext.isSearchOverlay(true)}
           >
             <svg
@@ -59,6 +54,11 @@ export const Navbar = () => {
             </svg>
           </button>
         )}
+        <Link to="/my-top-songs">
+          <button className="btn b btn-xs btn-outline ">
+            My&nbsp;Top&nbsp;Songs
+          </button>
+        </Link>
 
         <Menu as="div" className="ml-3 relative pr-2 mr-2">
           <div>

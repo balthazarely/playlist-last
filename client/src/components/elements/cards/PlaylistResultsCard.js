@@ -6,6 +6,7 @@ import { HiArrowRight } from "react-icons/hi";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { AnimatePresence, motion } from "framer-motion/dist/es/index";
 import { HiPlay } from "react-icons/hi";
+import { CardLoader } from "../loaders/CardLoader";
 
 const variants = {
   open: {
@@ -42,8 +43,11 @@ export const PlaylistResultsCard = ({ song }) => {
               <div className="relative h-12 w-12   ">
                 <img
                   className="absolute top-0 left-0 h-12 w-12 rounded-md  "
-                  src={song.album.images[2].url}
+                  src={
+                    song.album.images[2].url ? song.album.images[2].url : null
+                  }
                 />
+
                 {song.external_urls.spotify && (
                   <a target="BLANK" href={song.external_urls.spotify}>
                     <HiPlay className="absolute duration-200 transition  h-12 w-12  z-50 opacity-0 hover:opacity-100" />

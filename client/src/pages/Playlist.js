@@ -49,13 +49,9 @@ export const Playlist = () => {
   }, []);
 
   useEffect(() => {
-    // window.scrollTo(0, 0);
     gContext.isLoading(true);
     const fetchData = async () => {
-      const data = await getSong(id);
-
-      console.log(data);
-      setSong(data);
+      setSong(await getSong(id));
     };
     catchErrors(fetchData());
   }, [id]);
@@ -64,7 +60,6 @@ export const Playlist = () => {
     const fetchData = async () => {
       const { tracks } = await findRecommendedSongs(id);
       setSimilarSongs(tracks);
-      console.log(tracks);
       setSimilarSongsUri(tracks.map((song) => song.uri));
       gContext.isLoading(false);
     };
