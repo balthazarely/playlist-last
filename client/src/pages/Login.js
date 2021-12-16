@@ -8,7 +8,7 @@ const LOGIN_URI =
 const Login = () => (
   <div className="w-full h-screen flex justify-center items-center">
     <a href={LOGIN_URI}>
-      <button class={`btn btn-primary btn-outline `}>
+      <button className={`btn btn-primary btn-outline `}>
         <div className="flex flex-row items-center justify-center">
           <BsSpotify className=" w-6 h-6 mr-2" />
           Log in to Spotify

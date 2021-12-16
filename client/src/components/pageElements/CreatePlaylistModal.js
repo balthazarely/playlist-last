@@ -4,7 +4,7 @@ import { motion } from "framer-motion/dist/es/index";
 
 export const CreatePlaylistModal = ({ modalOpen, closeModal }) => {
   return (
-    <div class="modal-box flex flex-col justify-center items-center bg-base-300">
+    <div className="modal-box flex flex-col justify-center items-center bg-base-300">
       {modalOpen && (
         <>
           <motion.div
@@ -24,8 +24,8 @@ export const CreatePlaylistModal = ({ modalOpen, closeModal }) => {
           <div className="text-lg font-base ">
             Your new playlist can be found in your spotify app!
           </div>
-          <div class="modal-action">
-            <button onClick={closeModal} class="btn btn-primary">
+          <div className="modal-action">
+            <button onClick={closeModal} className="btn btn-primary">
               close
             </button>
           </div>

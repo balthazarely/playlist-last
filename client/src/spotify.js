@@ -120,6 +120,7 @@ axios.defaults.headers["Content-Type"] = "application/json";
  * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-current-users-profile
  * @returns {Promise}
  */
+
 export const getCurrentUserProfile = () => axios.get("/me");
 
 export const getCurrentUserPlaylists = (limit = 20) => {
@@ -132,21 +133,6 @@ export const getTopArtists = (time_range = "short_term", limit) => {
 
 export const getTopTracks = (time_range = "short_term", limit) => {
   return axios.get(`/me/top/tracks?time_range=${time_range}&limit=${limit}`);
-};
-
-export const playSong = async () => {
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
-
-  let play = await fetch(`https://api.spotify.com/v1/me/player/play`, {
-    method: "PUT",
-    body: JSON.stringify({ uris: ["spotify:album:2Ds60s4LcHcb77dNQm22kA"] }),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
 };
 
 async function getUser() {

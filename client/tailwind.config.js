@@ -21,13 +21,13 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#2dd4bf" /* Primary color */,
-          "primary-focus": "#22bfaa" /* Primary color - focused */,
+          primary: "#42BEC3" /* Primary color */,
+          "primary-focus": "#37B0B5" /* Primary color - focused */,
           "primary-content":
             "#f0fdfa" /* Foreground content color to use on primary color */,
 
-          secondary: "#A554D5" /* Secondary color */,
-          "secondary-focus": "#f3cc30" /* Secondary color - focused */,
+          secondary: "#9566D3" /* Secondary color */,
+          "secondary-focus": "#8357BD" /* Secondary color - focused */,
           "secondary-content":
             "#ffffff" /* Foreground content color to use on secondary color */,
 

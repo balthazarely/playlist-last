@@ -1,6 +1,5 @@
 import React from "react";
 import { listNamesFunction } from "../../utils";
-import { motion } from "framer-motion/dist/es/index";
 
 export const PageHeader = ({ song }) => {
   return (

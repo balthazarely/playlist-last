@@ -1,15 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { catchErrors } from "../utils";
-import {
-  getCurrentUserPlaylists,
-  getCurrentUserProfile,
-  getTopArtists,
-  searchForArtist,
-} from "../spotify";
+import { getCurrentUserProfile, searchForArtist } from "../spotify";
 import { SearchInput } from "../components/elements/inputs/SearchInput";
 import { PageWrapper } from "../components/wrappers/PageWrapper";
 import GlobalContext from "../context/appContext";
-import { AnimatePresence, motion } from "framer-motion/dist/es/index";
+import { motion } from "framer-motion/dist/es/index";
+import {
+  animationChildContainerProfile,
+  animationParentContainer,
+} from "../components/animations/animations";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -25,6 +24,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
+      console.log(data);
       setProfile(data);
       gContext.logInUser(data);
     };
@@ -58,25 +58,58 @@ const Profile = () => {
   }, [searchQuery]);
 
   return (
-    <div className="">
+    <PageWrapper>
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 20, opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-        {profile && (
-          <PageWrapper>
-            <SearchInput
-              setUserInput={setUserInput}
-              searchQuery={searchQuery}
-              searchResults={searchResults}
-              loading={loading}
-            />
-          </PageWrapper>
-        )}
+        <motion.div
+          variants={animationParentContainer}
+          initial="hidden"
+          animate="show"
+          className=" w-full "
+        >
+          {profile && (
+            <motion.div
+              className=" flex flex-col items-center justify-center max-w-sm gap-4"
+              variants={animationParentContainer}
+            >
+              <motion.div
+                variants={animationChildContainerProfile}
+                className="text-3xl text-gray-200 font-bold"
+              >
+                Welcome to SongDelve
+              </motion.div>
+              <motion.div
+                variants={animationChildContainerProfile}
+                className="text-md text-gray-200 text-center"
+              >
+                Make your own spotify playlists from songs you already love!
+                Either search below or look at your top played songs from
+                selecting them in the menu.
+              </motion.div>
+
+              <motion.div
+                variants={animationChildContainerProfile}
+                className="text-xl text-gray-200 font-bold text-center mt-8"
+              >
+                Find songs similar to:
+              </motion.div>
+              <motion.div variants={animationChildContainerProfile}>
+                <SearchInput
+                  setUserInput={setUserInput}
+                  searchQuery={searchQuery}
+                  searchResults={searchResults}
+                  loading={loading}
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </motion.div>
       </motion.div>
-    </div>
+    </PageWrapper>
   );
 };
 

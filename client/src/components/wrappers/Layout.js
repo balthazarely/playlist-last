@@ -2,7 +2,6 @@ import React from "react";
 
 const dimensions = {
   minHeight: "700px",
-  // height: "100vh",
 };
 
 export const Layout = ({ children }) => {

@@ -21,12 +21,7 @@ const container = {
   },
   exit: {
     opacity: 0,
-    transition: {
-      // duration: 0.6,
-      // staggerChildren: 0.07,
-      // ease: [0.43, 0.13, 0.23, 0.96],
-      // when: "afterChildren",
-    },
+    transition: {},
   },
 };
 
@@ -145,6 +140,7 @@ const SearchOverlay = () => {
                         >
                           <div className="col-span-4 flex ">
                             <img
+                              alt="result tag"
                               className=" h-12 w-12 rounded-md  "
                               src={song.album.images[2].url}
                             />

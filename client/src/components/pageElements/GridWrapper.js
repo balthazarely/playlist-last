@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { listNamesFunction } from "../../utils";
-import { HiOutlineDotsHorizontal, HiOutlineDotsVertical } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
 
@@ -38,6 +37,7 @@ export const GridWrapper = ({ song }) => {
           className={`duration-700  transition w-full h-full absolute top-0 left-0 ${
             imageLoaded ? "opacity-100" : "opacity-0"
           }`}
+          alt="song image"
           src={song.album.images[0].url}
           onLoad={() => setImageLoaded(true)}
         />

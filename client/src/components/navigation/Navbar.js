@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { catchErrors } from "../../utils";
 import GlobalContext from "../../context/appContext";
 import { Link, useLocation } from "react-router-dom";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import { Logo } from "./Logo";
 import { getCurrentUserProfile, logout } from "../../spotify";
 
@@ -10,30 +10,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Navbar = () => {
-  const [profile, setProfile] = useState(null);
+const Navbar = ({ profile }) => {
   const gContext = useContext(GlobalContext);
   const location = useLocation();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
-      console.log(data);
-    };
-
-    catchErrors(fetchData());
-  }, []);
-
   return (
     <div className="navbar mb-2 relative flex bg-transparent text-neutral-content container mx-auto max-w-7xl">
-      <div className="flex-1  ">
+      <div className="flex-1  ml-2  ">
         <Link to={"/"}>
           <Logo />
         </Link>
       </div>
 
-      <div className="flex-1 justify-end ">
+      <div className="flex-1 justify-end  mr-2 ">
         {location.pathname !== "/" && (
           <button
             className="btn btn-square btn-ghost "
@@ -46,9 +35,9 @@ export const Navbar = () => {
               className="inline-block w-6 h-6 stroke-current"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               ></path>
             </svg>
@@ -60,15 +49,23 @@ export const Navbar = () => {
           </button>
         </Link>
 
-        <Menu as="div" className="ml-3 relative pr-2 mr-2">
+        <Menu as="div" className="ml-3 relative pr-2">
           <div>
             <Menu.Button className="bg-gray-800 m-1 flex justify-center items-center text-sm rounded-full hover:bg-base-300  ">
               {profile ? (
-                <img
-                  className="w-10 h-10 rounded-full "
-                  src={profile.images[0].url}
-                  alt="profile__pic"
-                />
+                <>
+                  {profile.images[0] && profile.images[0].url ? (
+                    <img
+                      className="w-10 h-10 rounded-full "
+                      src={profile.images[0].url}
+                      alt="profile__pic"
+                    />
+                  ) : (
+                    <div className="bg-primary h-10 w-10 rounded-full flex justify-center items-center text-xl ">
+                      {profile.display_name.slice(0, 1).toUpperCase()}
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="relative h-10 w-10 animate-spin rounded-full bg-gradient-to-r from-primary to-base-100   ">
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8  bg-base-100  rounded-full "></div>
@@ -121,3 +118,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
+export default Navbar;

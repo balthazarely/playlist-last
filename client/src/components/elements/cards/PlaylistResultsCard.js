@@ -1,12 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import GlobalContext from "../../../context/appContext";
 import { listNamesFunction, millisToMinutesAndSeconds } from "../../../utils";
-import { HiArrowRight } from "react-icons/hi";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { AnimatePresence, motion } from "framer-motion/dist/es/index";
+import { motion } from "framer-motion/dist/es/index";
 import { HiPlay } from "react-icons/hi";
-import { CardLoader } from "../loaders/CardLoader";
 
 const variants = {
   open: {
@@ -19,10 +15,7 @@ const variants = {
 
 export const PlaylistResultsCard = ({ song }) => {
   const history = useHistory();
-  const gContext = useContext(GlobalContext);
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  console.log(song);
 
   const navigateToPlaylistPage = (songid) => {
     history.push(`/playlist/${songid}`);
@@ -42,6 +35,7 @@ export const PlaylistResultsCard = ({ song }) => {
             <div className="col-span-4 flex">
               <div className="relative h-12 w-12   ">
                 <img
+                  alt="song album cover"
                   className="absolute top-0 left-0 h-12 w-12 rounded-md  "
                   src={
                     song.album.images[2].url ? song.album.images[2].url : null
@@ -65,7 +59,7 @@ export const PlaylistResultsCard = ({ song }) => {
             </div>
             <div className="col-span-1 flex items-center justify-end opacity-0 group-hover:opacity-100 duration-200 z-50 pr-2">
               <button
-                class="btn btn-outline btn-ghost btn-xs  font-base"
+                className="btn btn-outline btn-ghost btn-xs font-base"
                 onClick={(e) => {
                   navigateToPlaylistPage(song.id);
                   e.stopPropagation();

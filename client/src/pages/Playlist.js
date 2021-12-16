@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { PageHeader } from "../components/pageElements/PageHeader";
@@ -11,25 +11,12 @@ import { motion } from "framer-motion/dist/es/index";
 import { CreatePlaylistModal } from "../components/pageElements/CreatePlaylistModal";
 import { MakePlaylistButton } from "../components/elements/buttons/MakePlaylistButton";
 import { PageLoading } from "../components/pageElements/PageLoading";
+import {
+  animationChildContainer,
+  animationParentContainer,
+} from "../components/animations/animations";
 
-const container = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const listItem = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
-
-export const Playlist = () => {
+const Playlist = () => {
   const { id } = useParams();
   const [song, setSong] = useState(null);
   const [similarSongs, setSimilarSongs] = useState(null);
@@ -60,6 +47,7 @@ export const Playlist = () => {
     const fetchData = async () => {
       const { tracks } = await findRecommendedSongs(id);
       setSimilarSongs(tracks);
+      let songUri = tracks.map((song) => song.uri);
       setSimilarSongsUri(tracks.map((song) => song.uri));
       gContext.isLoading(false);
     };
@@ -90,6 +78,7 @@ export const Playlist = () => {
           transition={{ duration: 0.2, when: "beforeChildren" }}
         >
           <PageHeader song={song} />
+
           <div className="w-full my-6 flex justify-between items-center">
             <MakePlaylistButton
               fakeLoading={fakeLoading}
@@ -99,17 +88,21 @@ export const Playlist = () => {
 
           {song && similarSongs && (
             <motion.div
-              variants={container}
+              variants={animationParentContainer}
               initial="hidden"
               animate="show"
               className=" grid grid-cols-1 gap-2 w-full  "
             >
               {similarSongs.map((song, i) => (
-                <motion.div variants={container} className="w-full  ">
+                <motion.div
+                  variants={animationParentContainer}
+                  className="w-full"
+                  key={i}
+                >
                   <PlaylistResultsCard
                     key={i}
                     song={song}
-                    variants={listItem}
+                    variants={animationChildContainer}
                   />
                 </motion.div>
               ))}
@@ -128,9 +121,11 @@ export const Playlist = () => {
           <PageLoading />
         </motion.div>
       )}
-      <div id="my-modal" class={`modal ${modalOpen && "modal-open"}`}>
+      <div id="my-modal" className={`modal ${modalOpen && "modal-open"}`}>
         <CreatePlaylistModal closeModal={closeModal} modalOpen={modalOpen} />
       </div>
     </PageWrapper>
   );
 };
+
+export default Playlist;

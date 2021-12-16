@@ -6,23 +6,10 @@ import { getCurrentUserProfile, getTopTracks } from "../spotify";
 import { motion } from "framer-motion/dist/es/index";
 import { catchErrors } from "../utils";
 import { PageLoading } from "../components/pageElements/PageLoading";
-
-const container = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.03,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const listItem = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
+import {
+  animationChildContainer,
+  animationParentContainer,
+} from "../components/animations/animations";
 
 const timeRange = [
   { value: "long_term", name: "Long Term" },
@@ -30,7 +17,7 @@ const timeRange = [
   { value: "short_term", name: "Short Term" },
 ];
 
-export const MyMusic = () => {
+const MyMusic = () => {
   const [profile, setProfile] = useState(null);
   const [topTracks, setTopTracks] = useState(null);
   const [sortMusicBy, setSortMusicBy] = useState(timeRange[2].value);
@@ -76,7 +63,7 @@ export const MyMusic = () => {
               {timeRange.map((term) => (
                 <button
                   onClick={() => setSortMusicBy(term.value)}
-                  class={`btn  btn-xs ${
+                  className={`btn   btn-xs ${
                     sortMusicBy === term.value ? "btn-active" : ""
                   }`}
                 >
@@ -85,9 +72,10 @@ export const MyMusic = () => {
               ))}
             </div>
           </div>
+
           {!gContext.loading && (
             <motion.div
-              variants={container}
+              variants={animationParentContainer}
               initial="hidden"
               animate="show"
               className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 w-full "
@@ -95,11 +83,14 @@ export const MyMusic = () => {
               {topTracks &&
                 topTracks.items.map((song) => (
                   <motion.div
-                    variants={container}
+                    variants={animationParentContainer}
                     className="w-full"
                     key={song.id}
                   >
-                    <GridWrapper song={song} variants={listItem} />
+                    <GridWrapper
+                      song={song}
+                      variants={animationChildContainer}
+                    />
                   </motion.div>
                 ))}
             </motion.div>
@@ -120,3 +111,5 @@ export const MyMusic = () => {
     </PageWrapper>
   );
 };
+
+export default MyMusic;

@@ -13,7 +13,7 @@ export const SearchInput = ({
       <input
         type="text"
         placeholder="Enter song name"
-        className="input rounded-3xl w-full  text-md shadow-xl"
+        className="input  input-primary rounded-3xl w-full  text-md shadow-xl"
         onChange={(e) => setUserInput(e.target.value)}
         value={searchQuery}
       />
@@ -26,17 +26,26 @@ export const SearchInput = ({
           </div>
         )}
       </div>
-      {searchResults && searchQuery.length > 2 && !loading ? (
-        <div className="bg-base-100 mt-2 p-3 rounded-3xl">
-          <div style={{ color: "white" }}>
-            {searchResults.items.map((song, i) => (
-              <SearchResultCard song={song} key={i} largeText={true} />
-            ))}
+      {searchResults &&
+        searchQuery.length > 2 &&
+        !loading &&
+        searchResults.items.length > 0 && (
+          <div className="bg-base-100 mt-2 p-3 rounded-3xl">
+            <div style={{ color: "white" }}>
+              {searchResults.items.map((song, i) => (
+                <SearchResultCard song={song} key={i} largeText={true} />
+              ))}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
+        )}
+      {searchResults &&
+        searchQuery.length > 2 &&
+        !loading &&
+        searchResults.items.length === 0 && (
+          <div className={`text-center mt-8 text-lg font-bold text-gray-400`}>
+            No results
+          </div>
+        )}
     </div>
   );
 };
