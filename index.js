@@ -30,13 +30,17 @@ app.get("/login", (req, res) => {
   res.cookie(stateKey, state);
 
   const scope = [
-    "user-read-private",
-    "user-read-email",
+    // "user-read-email",
     "user-top-read",
-    "playlist-modify-private",
     "playlist-modify-public",
-    "streaming",
   ].join(" ");
+
+  // "user-read-private",
+  // "user-read-email",
+  // "user-top-read",
+  // "playlist-modify-private",
+  // "playlist-modify-public",
+  // "streaming",
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
