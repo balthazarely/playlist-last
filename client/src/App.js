@@ -38,7 +38,6 @@ function App() {
           ) : (
             <>
               <Navbar profile={profile} />
-
               <AnimatePresence exitBeforeEnter initial={false}>
                 <Switch location={location} key={location.pathname}>
                   <Route path="/playlist/:id" component={Playlist} />
@@ -46,7 +45,6 @@ function App() {
                   <Route path="/" component={Profile} />
                 </Switch>
               </AnimatePresence>
-              {/* <Footer /> */}
             </>
           )}
         </Layout>

@@ -24,7 +24,6 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
-      console.log(data);
       setProfile(data);
       gContext.logInUser(data);
     };
@@ -80,7 +79,7 @@ const Profile = () => {
                 variants={animationChildContainerProfile}
                 className="text-3xl text-gray-200 font-bold"
               >
-                Welcome to SongDelve
+                Welcome to SongDive
               </motion.div>
               <motion.div
                 variants={animationChildContainerProfile}
