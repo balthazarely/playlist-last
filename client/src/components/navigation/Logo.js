@@ -3,6 +3,7 @@ import React from "react";
 export const Logo = () => {
   return (
     <svg
+      className="h-96 w-96"
       width="159"
       height="28"
       viewBox="0 0 159 28"
