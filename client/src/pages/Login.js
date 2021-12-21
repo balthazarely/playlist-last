@@ -3,7 +3,7 @@ import { BsSpotify } from "react-icons/bs";
 const LOGIN_URI =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:8888/login"
-    : "https://playlistnr.herokuapp.com/login";
+    : "https://song-dive.herokuapp.com/login";
 
 const Login = () => (
   <div className="w-full h-screen flex justify-center items-center">
