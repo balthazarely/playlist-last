@@ -141,7 +141,7 @@ const SearchOverlay = () => {
                           <div className="col-span-4 flex ">
                             <img
                               alt="result tag"
-                              className=" h-12 w-12 rounded-md  "
+                              className=" h-12 w-12   "
                               src={song.album.images[2].url}
                             />
                             <div className="ml-4 flex justify-center flex-col truncate overflow-hidden ">
