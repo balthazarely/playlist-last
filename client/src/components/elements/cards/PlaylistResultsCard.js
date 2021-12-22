@@ -57,7 +57,7 @@ export const PlaylistResultsCard = ({ song }) => {
                 </div>
               </div>
             </div>
-            <div className="col-span-2 flex items-center justify-end  duration-200 z-50 ">
+            <div className="col-span-2 flex items-center justify-end  duration-200  ">
               <button
                 className="btn btn-outline btn-ghost btn-xs font-base opacity-0 group-hover:opacity-100"
                 onClick={(e) => {
