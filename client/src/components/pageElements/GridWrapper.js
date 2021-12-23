@@ -6,11 +6,15 @@ import { BsSpotify } from "react-icons/bs";
 
 export const GridWrapper = ({ song }) => {
   const history = useHistory();
-
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const navigateToPlaylistPage = (songid) => {
     history.push(`/playlist/${songid}`);
+  };
+
+  const openSpotifyLink = (e, link) => {
+    window.open(link);
+    e.stopPropagation(e);
   };
 
   return (
@@ -51,7 +55,7 @@ export const GridWrapper = ({ song }) => {
           {listNamesFunction(song.artists)}
         </div>
         <div className=" flex justify-start mt-2">
-          <a target="BLANK" href={song.external_urls.spotify}>
+          <a onClick={(e) => openSpotifyLink(e, song.external_urls.spotify)}>
             <BsSpotify className="text-gray-400 duration-200 transition-all hover:text-gray-200 w-5 h-5 " />
           </a>
         </div>

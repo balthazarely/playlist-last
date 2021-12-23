@@ -13,6 +13,8 @@ import { AnimatePresence } from "framer-motion/dist/es/index";
 import Navbar from "./components/navigation/Navbar";
 import { accessToken, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./utils";
+import { Sidenav } from "./components/navigation/Sidenav";
+import BrowserResizeDetection from "./components/hooks/BrowserResizeDetection";
 
 function App() {
   const location = useLocation();
@@ -25,7 +27,6 @@ function App() {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
     };
-
     catchErrors(fetchData());
   }, []);
 
@@ -37,7 +38,9 @@ function App() {
             <Login />
           ) : (
             <>
+              <BrowserResizeDetection />
               <Navbar profile={profile} />
+              <Sidenav profile={profile} />
               <AnimatePresence exitBeforeEnter initial={false}>
                 <Switch location={location} key={location.pathname}>
                   <Route path="/playlist/:id" component={Playlist} />

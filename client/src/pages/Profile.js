@@ -83,7 +83,7 @@ const Profile = () => {
               </motion.div>
               <motion.div
                 variants={animationChildContainerProfile}
-                className="text-md text-gray-200 text-center"
+                className="text-md text-gray-200 text-center  mx-4 sm:mx-0"
               >
                 Make your own spotify playlists from songs you already love!
                 Either search below or look at your top played songs from

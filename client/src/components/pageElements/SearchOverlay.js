@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { searchForArtist } from "../../spotify";
 import GlobalContext from "../../context/appContext";
@@ -73,8 +73,22 @@ const SearchOverlay = () => {
     gContext.isSearchOverlay(false);
   };
 
+  const escFunction = useCallback((event) => {
+    if (event.keyCode === 27) {
+      gContext.isSearchOverlay(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
   return (
-    <div className="flex justify-center items-center  h-full    ">
+    <div className="flex justify-center items-center  h-full   ">
       <button
         onClick={() => gContext.isSearchOverlay(false)}
         className="absolute top-0 right-0 m-8"

@@ -9,15 +9,15 @@ export const SearchInput = ({
   loading,
 }) => {
   return (
-    <div className="relative w-96 ">
+    <div className="relative w-96 sm:px-0 px-6 ">
       <input
         type="text"
         placeholder="Enter song name"
-        className="input  input-primary rounded-3xl w-full  text-md shadow-xl"
+        className="input  input-primary rounded-3xl w-full   text-md shadow-xl"
         onChange={(e) => setUserInput(e.target.value)}
         value={searchQuery}
       />
-      <div className="h-8 w-8  right-3 top-2 absolute flex items-center  justify-center ">
+      <div className="h-8 w-8  sm:right-3 right-9 top-2 absolute flex items-center  justify-center ">
         {!loading ? (
           <SearchCircleIcon className=" text-primary " />
         ) : (
@@ -30,7 +30,7 @@ export const SearchInput = ({
         searchQuery.length > 2 &&
         !loading &&
         searchResults.items.length > 0 && (
-          <div className="bg-base-100 mt-2 p-3 rounded-3xl">
+          <div className="bg-base-100 mt-2 p-3 rounded-3xl border-primary border shadow-2xl">
             <div style={{ color: "white" }}>
               {searchResults.items.map((song, i) => (
                 <SearchResultCard song={song} key={i} largeText={true} />

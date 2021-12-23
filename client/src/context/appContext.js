@@ -5,6 +5,7 @@ export function GlobalProvider({ children }) {
   const [currentLoggedInUser, setCurrentLoggedInUser] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showSearchOverlay, setShowSearchOverlay] = useState(false);
+  const [sidenavOpen, setSidenavOpen] = useState(false);
 
   const logInUser = (user) => {
     setCurrentLoggedInUser(user);
@@ -18,6 +19,14 @@ export function GlobalProvider({ children }) {
     setShowSearchOverlay(loading);
   };
 
+  const toggleSidenav = () => {
+    setSidenavOpen(!sidenavOpen);
+  };
+
+  const closeSidenav = () => {
+    setSidenavOpen(false);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -27,6 +36,9 @@ export function GlobalProvider({ children }) {
         isSearchOverlay,
         currentLoggedInUser,
         logInUser,
+        sidenavOpen,
+        toggleSidenav,
+        closeSidenav,
       }}
     >
       {children}
