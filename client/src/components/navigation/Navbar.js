@@ -59,7 +59,7 @@ const Navbar = ({ profile }) => {
             <div>
               <Menu.Button className="bg-gray-800 flex justify-center items-center text-sm rounded-full hover:bg-base-300  ">
                 {profile ? (
-                  <>
+                  <div>
                     {profile.images[0] && profile.images[0].url ? (
                       <img
                         className="w-10 h-10 rounded-full mr-1 "
@@ -71,7 +71,7 @@ const Navbar = ({ profile }) => {
                         {profile.display_name.slice(0, 1).toUpperCase()}
                       </div>
                     )}
-                  </>
+                  </div>
                 ) : (
                   <div className="relative h-10 w-10 animate-spin rounded-full bg-gradient-to-r from-primary to-base-100   ">
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8  bg-base-100  rounded-full "></div>
