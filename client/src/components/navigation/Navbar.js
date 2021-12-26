@@ -50,6 +50,11 @@ const Navbar = ({ profile }) => {
               My&nbsp;Top&nbsp;Songs
             </button>
           </Link>
+          <Link to="/explore-genre">
+            <button className="btn b btn-xs btn-outline ">
+              Genre&nbsp;Explorer
+            </button>
+          </Link>
           <Menu as="div" className="ml-3 relative ">
             <div>
               <Menu.Button className="bg-gray-800 flex justify-center items-center text-sm rounded-full hover:bg-base-300  ">

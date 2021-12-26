@@ -4,10 +4,6 @@ import { listNamesFunction } from "../../../utils";
 
 export default function SearchResultCard({ song, largeText }) {
   const history = useHistory();
-  let names = song.artists
-    .map((artist) => artist.name)
-    .join(", ")
-    .concat(" ", "- ", song.name);
 
   const navigateToPlaylistPage = () => history.push(`/playlist/${song.id}`);
 

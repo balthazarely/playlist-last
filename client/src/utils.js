@@ -23,3 +23,19 @@ export function listNamesFunction(people) {
   const finalName = names.pop();
   return names.length ? names.join(", ") + " & " + finalName : finalName;
 }
+export function insertUrlParam(key, value) {
+  let searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(key, value);
+  let newurl =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    window.location.pathname +
+    "?" +
+    searchParams.toString();
+  window.history.pushState({ path: newurl }, "", newurl);
+}
+
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

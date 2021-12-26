@@ -34,19 +34,19 @@ export const PlaylistResultsCard = ({ song }) => {
           <div className="w-full grid grid-cols-5 gap-0 cursor-pointer group   p-2  ">
             <div className="col-span-3  flex">
               <div className="relative h-12 w-12   ">
-                <img
-                  alt="song album cover"
-                  className="absolute top-0 left-0 h-12 w-12   "
-                  src={
-                    song.album.images[2].url ? song.album.images[2].url : null
-                  }
-                />
-
-                {/* {song.external_urls.spotify && (
-                  <a target="BLANK" href={song.external_urls.spotify}>
-                    <HiPlay className="absolute duration-200 transition  h-12 w-12  z-50 opacity-0 hover:opacity-100" />
-                  </a>
-                )} */}
+                {song.album.images &&
+                  song.album.images[2] &&
+                  song.album.images[2].url && (
+                    <img
+                      alt="song album cover"
+                      className="absolute top-0 left-0 h-12 w-12   "
+                      src={
+                        song.album.images[2].url
+                          ? song.album.images[2].url
+                          : null
+                      }
+                    />
+                  )}
               </div>
               <div className="ml-4 flex justify-center flex-col truncate overflow-hidden ">
                 <div className="truncate font-bold md:text-base text-sm overflow-ellipsis overflow-hidden  transition-all duration-200  ">

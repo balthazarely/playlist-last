@@ -23,7 +23,6 @@ const Playlist = () => {
   const [similarSongsUri, setSimilarSongsUri] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [fakeLoading, setFakeLoading] = useState(false);
-
   const gContext = useContext(GlobalContext);
 
   useEffect(() => {
@@ -47,10 +46,10 @@ const Playlist = () => {
     const fetchData = async () => {
       const { tracks } = await findRecommendedSongs(id);
       setSimilarSongs(tracks);
-      let songUri = tracks.map((song) => song.uri);
       setSimilarSongsUri(tracks.map((song) => song.uri));
       gContext.isLoading(false);
     };
+
     catchErrors(fetchData());
   }, [setSong, id]);
 
@@ -85,7 +84,6 @@ const Playlist = () => {
               createPlaylistForUser={createPlaylistForUser}
             />
           </div>
-
           {song && similarSongs && (
             <motion.div
               variants={animationParentContainer}

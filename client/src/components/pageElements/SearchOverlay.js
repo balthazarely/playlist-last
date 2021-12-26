@@ -81,7 +81,6 @@ const SearchOverlay = () => {
 
   useEffect(() => {
     document.addEventListener("keydown", escFunction, false);
-
     return () => {
       document.removeEventListener("keydown", escFunction, false);
     };

@@ -41,7 +41,6 @@ const Profile = () => {
       if (searchQuery.length > 2) {
         const { tracks } = await searchForArtist(searchQuery);
         setSearchResults(tracks);
-        console.log(tracks);
       }
     };
     let debouncer = setTimeout(() => {

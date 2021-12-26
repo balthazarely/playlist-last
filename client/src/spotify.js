@@ -127,10 +127,6 @@ export const getCurrentUserPlaylists = (limit = 20) => {
   return axios.get(`/me/playlists?limit=${limit}`);
 };
 
-export const getTopArtists = (time_range = "short_term", limit) => {
-  return axios.get(`/me/top/artists?time_range=${time_range}&limit=${limit}`);
-};
-
 export const getTopTracks = (time_range = "short_term", limit) => {
   return axios.get(`/me/top/tracks?time_range=${time_range}&limit=${limit}`);
 };
@@ -153,7 +149,40 @@ export const createPlaylist = async (song, songUris) => {
       {
         method: "POST",
         headers: headers,
-        body: JSON.stringify({ name: `Songs inspired by ${song.name}` }),
+        body: JSON.stringify({
+          name: `SongDive: Songs inspired by ${song.name}`,
+        }),
+      }
+    );
+    let data = await dataFetch.json();
+    let playlist = await fetch(
+      `https://api.spotify.com/v1/users/${userId}/playlists/${data.id}/tracks`,
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ uris: songUris }),
+      }
+    );
+  } catch (err) {
+    console.log(
+      "hmm, looks like the developer messed up here... or the api changed"
+    );
+  }
+};
+
+export const createGenrePlaylist = async (genre, songUris) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  try {
+    let userId = await getUser();
+    let dataFetch = await fetch(
+      `https://api.spotify.com/v1/users/${userId}/playlists`,
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({ name: `SongDive: ${genre} playlist` }),
       }
     );
     let data = await dataFetch.json();
@@ -215,6 +244,46 @@ export const findRecommendedSongs = async (songId) => {
   try {
     let response = await fetch(
       `https://api.spotify.com/v1/recommendations?seed_tracks=${songId}&limit=50`,
+
+      {
+        headers: headers,
+      }
+    );
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getGenreList = async () => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  try {
+    let response = await fetch(
+      `https://api.spotify.com/v1/recommendations/available-genre-seeds`,
+
+      {
+        headers: headers,
+      }
+    );
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchGenre = async (genre) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+
+  try {
+    let response = await fetch(
+      `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&limit=50`,
 
       {
         headers: headers,

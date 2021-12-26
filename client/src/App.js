@@ -15,6 +15,7 @@ import { accessToken, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./utils";
 import { Sidenav } from "./components/navigation/Sidenav";
 import BrowserResizeDetection from "./components/hooks/BrowserResizeDetection";
+import { ExploreGenre } from "./pages/ExploreGenre";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,11 @@ function App() {
                 <Switch location={location} key={location.pathname}>
                   <Route path="/playlist/:id" component={Playlist} />
                   <Route path="/my-top-songs" component={MyMusic} />
+                  <Route
+                    path="/explore-genre/:genre?"
+                    component={ExploreGenre}
+                  />
+
                   <Route path="/" component={Profile} />
                 </Switch>
               </AnimatePresence>

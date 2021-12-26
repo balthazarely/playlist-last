@@ -18,7 +18,11 @@ export const PageWrapper = ({ children }) => {
 
   return (
     <div
-      style={location.pathname !== "/" ? loadStyle : loadStyleSeach}
+      style={
+        location.pathname !== "/" && location.pathname !== "/explore-genre"
+          ? loadStyle
+          : loadStyleSeach
+      }
       className=" flex flex-col items-center container mx-auto max-w-2xl mt-10 mb-10 px-2 h-full min-h-96 "
     >
       <>{children}</>
