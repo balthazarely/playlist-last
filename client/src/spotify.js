@@ -138,7 +138,7 @@ export const createPlaylist = async (song, songUris, playlistType) => {
   };
 
   const genreObj = {
-    name: `SongDive: ${capitalizeFirstLetter(song)} Playlist`,
+    name: `SongDive: ${song} Playlist`,
     description: `This playlist was created with popular songs within the ${song} genre`,
   };
 

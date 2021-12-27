@@ -40,7 +40,7 @@ export const PlaylistResultsCard = ({ song }) => {
                   song.album.images[2].url && (
                     <img
                       alt="song album cover"
-                      className="absolute top-0 left-0 h-12 w-12   "
+                      className=" h-12 w-12   "
                       src={
                         song.album.images[2].url
                           ? song.album.images[2].url

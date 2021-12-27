@@ -147,7 +147,7 @@ export const ExploreGenre = () => {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className=" flex flex-wrap  "
+                className=" flex flex-wrap genre__explore__scroller "
               >
                 {genres.map((genre) => (
                   <button
