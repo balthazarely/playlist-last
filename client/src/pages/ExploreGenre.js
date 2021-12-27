@@ -13,6 +13,7 @@ import { AnimatePresence } from "framer-motion/dist/es/index";
 import { PlaylistResultsCard } from "../components/elements/cards/PlaylistResultsCard";
 import { MakeGenrePlaylist } from "../components/elements/buttons/MakeGenrePlaylist";
 import { CreatePlaylistModal } from "../components/pageElements/CreatePlaylistModal";
+import { HiRefresh } from "react-icons/hi";
 
 export const ExploreGenre = () => {
   const search = useLocation().search;
@@ -27,6 +28,8 @@ export const ExploreGenre = () => {
   const [genrePlaylistUri, setGenrePlaylistUri] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [fakeLoading, setFakeLoading] = useState(false);
+  const [refreshLoader, setRefreshLoader] = useState(false);
+
   const [playlistFakeLoading, setPlaylistFakeLoading] = useState(false);
   const myRef = useRef(null);
 
@@ -50,6 +53,16 @@ export const ExploreGenre = () => {
       setFakeLoading(false);
       myRef.current.scrollIntoView();
     }, 10);
+  };
+
+  const refreshGenrePlaylist = async (genre) => {
+    setRefreshLoader(true);
+    const { tracks } = await searchGenre(genre);
+    setTimeout(() => {
+      setGenrePlaylist(tracks);
+      setGenrePlaylistUri(tracks.map((song) => song.uri));
+      setRefreshLoader(false);
+    }, 500);
   };
 
   useEffect(() => {
@@ -119,6 +132,7 @@ export const ExploreGenre = () => {
           minHeight: "300px",
           maxHeight: "300px",
           height: "100%",
+          width: "100%",
           overflowY: "auto",
           marginBottom: "20px",
         }}
@@ -214,10 +228,25 @@ export const ExploreGenre = () => {
                     </div>
                   )}
                 </div>
-                <MakeGenrePlaylist
-                  fakeLoading={playlistFakeLoading}
-                  createPlaylistForUser={createPlaylistForUser}
-                />
+                <div className="flex j justify-start items-start gap-2 ">
+                  <MakeGenrePlaylist
+                    fakeLoading={playlistFakeLoading}
+                    createPlaylistForUser={createPlaylistForUser}
+                  />
+                  <button
+                    onClick={() => refreshGenrePlaylist(selectedGenre)}
+                    className={`btn btn-primary btn-outline ${
+                      refreshLoader ? "loading" : ""
+                    }`}
+                  >
+                    <div
+                      className={`flex flex-row items-center justify-center `}
+                    >
+                      {!refreshLoader && <HiRefresh className=" w-6 h-6" />}
+                      Refresh
+                    </div>
+                  </button>
+                </div>
               </motion.div>
               {genrePlaylist.map((song, i) => (
                 <motion.div

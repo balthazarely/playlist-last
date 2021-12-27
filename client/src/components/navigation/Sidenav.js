@@ -13,7 +13,7 @@ export const Sidenav = ({ profile }) => {
         onClick={gContext.toggleSidenav}
         className={`bg-black h-screen w-full fixed z-50 left-0 top-0 transition-opacity duration-200 ease-in-out 	 ${
           gContext.sidenavOpen
-            ? "opacity-50  pointer-events-auto"
+            ? "opacity-50  pointer-events-auto "
             : "opacity-0  pointer-events-none"
         }`}
       ></div>

@@ -14,6 +14,7 @@ function classNames(...classes) {
 const Navbar = ({ profile }) => {
   const gContext = useContext(GlobalContext);
   const location = useLocation();
+  console.log(location.pathname);
 
   return (
     <div className="navbar mb-2 relative flex bg-transparent text-neutral-content container mx-auto max-w-7xl px-3">
@@ -45,7 +46,7 @@ const Navbar = ({ profile }) => {
           </button>
         )}
         <div className="items-center hidden md:flex gap-2 ">
-          <Link to="/my-top-songs">
+          {/* <Link to="/my-top-songs">
             <button className="btn b btn-xs btn-outline ">
               My&nbsp;Top&nbsp;Songs
             </button>
@@ -54,7 +55,28 @@ const Navbar = ({ profile }) => {
             <button className="btn b btn-xs btn-outline ">
               Genre&nbsp;Explorer
             </button>
-          </Link>
+          </Link> */}
+          <div class="tabs tabs-boxed">
+            <Link to={"/my-top-songs"}>
+              <a
+                class={`tab ${
+                  location.pathname === "/my-top-songs" && "tab-active"
+                }`}
+              >
+                My&nbsp;Top&nbsp;Songs
+              </a>
+            </Link>
+            <Link to={"/explore-genre"}>
+              <a
+                class={`tab ${
+                  location.pathname === "/explore-genre" && "tab-active"
+                }`}
+              >
+                Genre&nbsp;Explorer
+              </a>
+            </Link>
+          </div>
+
           <Menu as="div" className="ml-3 relative ">
             <div>
               <Menu.Button className="bg-gray-800 flex justify-center items-center text-sm rounded-full hover:bg-base-300  ">
@@ -121,8 +143,11 @@ const Navbar = ({ profile }) => {
           </Menu>
         </div>
         <div className="flex items-center  md:hidden ">
-          <button className="btn btn-square btn-ghost text-3xl ">
-            <HiMenuAlt3 onClick={gContext.toggleSidenav} />
+          <button
+            className="btn btn-square btn-ghost text-3xl "
+            onClick={gContext.toggleSidenav}
+          >
+            <HiMenuAlt3 />
           </button>
         </div>
       </div>

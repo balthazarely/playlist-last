@@ -21,7 +21,7 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#42BEC3" /* Primary color */,
+          primary: "#36abaf" /* Primary color */,
           "primary-focus": "#37B0B5" /* Primary color - focused */,
           "primary-content":
             "#f0fdfa" /* Foreground content color to use on primary color */,

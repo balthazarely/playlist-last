@@ -7,7 +7,7 @@ export const MakeGenrePlaylist = ({
   smallBtn,
 }) => {
   return (
-    <div className="w-full  flex justify-between items-center ">
+    <div className=" ">
       <button
         onClick={() => createPlaylistForUser()}
         className={`btn btn-primary btn-outline ${
