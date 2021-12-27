@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { PageLoading } from "../components/pageElements/PageLoading";
 import { PageWrapper } from "../components/wrappers/PageWrapper";
-import { createGenrePlaylist, getGenreList, searchGenre } from "../spotify";
+import { createPlaylist, getGenreList, searchGenre } from "../spotify";
 import { capitalizeFirstLetter, catchErrors, insertUrlParam } from "../utils";
 import { motion } from "framer-motion/dist/es/index";
 import {
@@ -49,7 +49,7 @@ export const ExploreGenre = () => {
     setTimeout(() => {
       setFakeLoading(false);
       myRef.current.scrollIntoView();
-    }, 500);
+    }, 10);
   };
 
   useEffect(() => {
@@ -67,10 +67,10 @@ export const ExploreGenre = () => {
   const createPlaylistForUser = () => {
     setPlaylistFakeLoading(true);
     setTimeout(() => {
-      createGenrePlaylist(selectedGenre, genrePlaylistUri);
+      createPlaylist(selectedGenre, genrePlaylistUri, "genre");
       setPlaylistFakeLoading(false);
       setModalOpen(true);
-    }, 2000);
+    }, 1000);
   };
 
   const clearSearch = () => {
@@ -96,7 +96,7 @@ export const ExploreGenre = () => {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="font-semibold text-center text-2xl mb-6="
+        className="font-semibold text-center text-2xl"
       >
         <motion.div className="text-3xl text-gray-200 font-bold">
           Genre Explorer
@@ -108,8 +108,13 @@ export const ExploreGenre = () => {
           1. Select a Genre
         </motion.div>
       </motion.div>
-      <div
-        className="test"
+      <motion.div
+        className="border-primary border-2 p-4 rounded-2xl"
+        variants={animationParentContainerGenre}
+        key="modal"
+        initial="initial"
+        animate="animate"
+        exit="exit"
         style={{
           minHeight: "300px",
           maxHeight: "300px",
@@ -149,7 +154,7 @@ export const ExploreGenre = () => {
             </>
           )}
         </div>
-      </div>
+      </motion.div>
       <AnimatePresence>
         {fakeLoading && <PageLoading />}
         {genrePlaylist && !fakeLoading && (
@@ -161,7 +166,7 @@ export const ExploreGenre = () => {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="font-semibold text-primary text-2xl pt-24 mb-3"
+              className="font-semibold text-primary text-2xl pt-12 "
             >
               2. Make Your Playlist
             </motion.div>

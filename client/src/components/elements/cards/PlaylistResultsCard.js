@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { listNamesFunction, millisToMinutesAndSeconds } from "../../../utils";
 import { motion } from "framer-motion/dist/es/index";
 import { BsSpotify } from "react-icons/bs";
+import { HiEye } from "react-icons/hi";
 
 const variants = {
   open: {
@@ -59,13 +60,22 @@ export const PlaylistResultsCard = ({ song }) => {
             </div>
             <div className="col-span-2 flex items-center justify-end  duration-200  ">
               <button
-                className="btn btn-outline btn-ghost btn-xs font-base opacity-0 group-hover:opacity-100"
+                className=" hidden sm:block btn btn-outline btn-ghost btn-xs font-base opacity-0 group-hover:opacity-100"
                 onClick={(e) => {
                   navigateToPlaylistPage(song.id);
                   e.stopPropagation();
                 }}
               >
                 Find Similar
+              </button>
+              <button>
+                <HiEye
+                  onClick={(e) => {
+                    navigateToPlaylistPage(song.id);
+                    e.stopPropagation();
+                  }}
+                  className="text-2xl hover:text-primary block sm:hidden mr-1"
+                />
               </button>
               <a target="BLANK" href={song.external_urls.spotify}>
                 <BsSpotify className="text-gray-400 duration-200 transition-all hover:text-gray-200 w-6 h-6 mr-2 ml-3" />
@@ -86,14 +96,14 @@ export const PlaylistResultsCard = ({ song }) => {
               <span className="text-gray-400 font-normal">Year: </span>
               {song.album.release_date.slice(0, 4)}
             </div>
-            <div className="text-xs  text-gray-200 font-bold">
+            {/* <div className="text-xs  text-gray-200 font-bold">
               <span className="text-gray-400 font-normal">Length: </span>
               {millisToMinutesAndSeconds(song.duration_ms)}
             </div>
-            <div className="text-xs  text-gray-200 font-bold">
+            <div className="text-xs  text-gray-200 font-bold hidden">
               <span className="text-gray-400 font-normal">Popularity: </span>
               {song.popularity}
-            </div>
+            </div> */}
 
             {/* {song.external_urls.spotify && (
                   <a target="BLANK" href={song.external_urls.spotify}>

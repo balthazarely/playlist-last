@@ -56,10 +56,10 @@ const Playlist = () => {
   const createPlaylistForUser = () => {
     setFakeLoading(true);
     setTimeout(() => {
-      createPlaylist(song, similarSongsUri);
+      createPlaylist(song, similarSongsUri, "track");
       setFakeLoading(false);
       setModalOpen(true);
-    }, 2000);
+    }, 1000);
   };
 
   const closeModal = () => {

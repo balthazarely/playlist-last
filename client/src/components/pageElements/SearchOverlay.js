@@ -87,7 +87,7 @@ const SearchOverlay = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center  h-full   ">
+    <div className="flex justify-center items-start mt-24  h-full   ">
       <button
         onClick={() => gContext.isSearchOverlay(false)}
         className="absolute top-0 right-0 m-8"
@@ -104,7 +104,7 @@ const SearchOverlay = () => {
           height: "50%",
           maxHeight: " 800px",
         }}
-        className="h-full w-full  px-2 "
+        className="h-full w-full px-6  "
       >
         <input
           autoFocus
@@ -143,7 +143,7 @@ const SearchOverlay = () => {
                     animate="show"
                     exit="exit"
                   >
-                    <div className=" mt-2 py-3 rounded-3xl  w-full grid md:grid-cols-3 grid-cols-2   gap-2">
+                    <div className=" mt-2 py-3 rounded-3xl  w-full grid  md:grid-cols-3  sm:grid-cols-2 grid-cols-1   gap-2">
                       {searchResults.items.map((song, i) => (
                         <motion.div
                           onClick={() => navigateToPlaylistPage(song.id)}

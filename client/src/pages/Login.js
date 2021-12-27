@@ -92,13 +92,13 @@ const Login = () => (
       >
         <div
           variants={animationChildContainerProfile}
-          className="text-3xl text-gray-200 font-bold"
+          className="text-3xl text-gray-200 font-bold "
         >
           Welcome to SongDive
         </div>
         <div
           variants={animationChildContainerProfile}
-          className="text-md text-gray-200 text-center"
+          className="text-md text-gray-200 text-center mx-4 sm:mx-0"
         >
           Make your own spotify playlists from songs you already love! Log into
           your Spotify account below to get started!

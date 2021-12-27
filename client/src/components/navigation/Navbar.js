@@ -44,7 +44,7 @@ const Navbar = ({ profile }) => {
             </svg>
           </button>
         )}
-        <div className=" items-center hidden md:flex gap-2 ">
+        <div className="items-center hidden md:flex gap-2 ">
           <Link to="/my-top-songs">
             <button className="btn b btn-xs btn-outline ">
               My&nbsp;Top&nbsp;Songs

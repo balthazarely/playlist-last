@@ -12,7 +12,9 @@ export const Sidenav = ({ profile }) => {
       <div
         onClick={gContext.toggleSidenav}
         className={`bg-black h-screen w-full fixed z-50 left-0 top-0 transition-opacity duration-200 ease-in-out 	 ${
-          gContext.sidenavOpen ? "opacity-50 block" : "opacity-0 hidden"
+          gContext.sidenavOpen
+            ? "opacity-50  pointer-events-auto"
+            : "opacity-0  pointer-events-none"
         }`}
       ></div>
       <div
@@ -24,7 +26,7 @@ export const Sidenav = ({ profile }) => {
           <Link to={"/"} onClick={gContext.toggleSidenav}>
             <Logo />
           </Link>
-          {profile && profile.images[0] && profile.images[0].url && (
+          {profile && (
             <div className="my-5 flex flex-col items-start justify-between gap-2">
               <div className="text-sm">
                 Signed in as{" "}

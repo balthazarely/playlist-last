@@ -34,16 +34,3 @@ body::-webkit-scrollbar-thumb {
   border-radius: 6px;
   /* border: 3px solid red; */
 }
-
-.test {
-  scrollbar-width: thin;
-  scrollbar-color: #1f2937 #42bec3;
-}
-.test::-webkit-scrollbar-track {
-  background: #1f2937;
-}
-.test::-webkit-scrollbar-thumb {
-  background-color: #42bec3;
-  border-radius: 6px;
-  /* border: 3px solid red; */
-}

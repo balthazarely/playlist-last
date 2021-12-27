@@ -1,4 +1,5 @@
 import axios from "axios";
+import { capitalizeFirstLetter } from "./utils";
 
 const LOCALSTORAGE_KEYS = {
   accessToken: "spotify_access_token",
@@ -16,11 +17,9 @@ const LOCALSTORAGE_VALUES = {
 };
 
 export const logout = () => {
-  // Clear all localStorage items
   for (const property in LOCALSTORAGE_KEYS) {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
-  // Navigate to homepage
   window.location = window.location.origin;
 };
 
@@ -123,10 +122,6 @@ axios.defaults.headers["Content-Type"] = "application/json";
 
 export const getCurrentUserProfile = () => axios.get("/me");
 
-export const getCurrentUserPlaylists = (limit = 20) => {
-  return axios.get(`/me/playlists?limit=${limit}`);
-};
-
 export const getTopTracks = (time_range = "short_term", limit) => {
   return axios.get(`/me/top/tracks?time_range=${time_range}&limit=${limit}`);
 };
@@ -137,9 +132,19 @@ async function getUser() {
   return response.data.id;
 }
 
-export const createPlaylist = async (song, songUris) => {
+export const createPlaylist = async (song, songUris, playlistType) => {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
+  };
+
+  const genreObj = {
+    name: `SongDive: ${capitalizeFirstLetter(song)} Playlist`,
+    description: `This playlist was created with popular songs within the ${song} genre`,
+  };
+
+  const trackObj = {
+    name: `SongDive: Songs inspired by ${song.name}`,
+    description: `This playlist is comprised of songs that sounds like ${song.name}`,
   };
 
   try {
@@ -149,40 +154,7 @@ export const createPlaylist = async (song, songUris) => {
       {
         method: "POST",
         headers: headers,
-        body: JSON.stringify({
-          name: `SongDive: Songs inspired by ${song.name}`,
-        }),
-      }
-    );
-    let data = await dataFetch.json();
-    let playlist = await fetch(
-      `https://api.spotify.com/v1/users/${userId}/playlists/${data.id}/tracks`,
-      {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({ uris: songUris }),
-      }
-    );
-  } catch (err) {
-    console.log(
-      "hmm, looks like the developer messed up here... or the api changed"
-    );
-  }
-};
-
-export const createGenrePlaylist = async (genre, songUris) => {
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
-
-  try {
-    let userId = await getUser();
-    let dataFetch = await fetch(
-      `https://api.spotify.com/v1/users/${userId}/playlists`,
-      {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({ name: `SongDive: ${genre} playlist` }),
+        body: JSON.stringify(playlistType === "genre" ? genreObj : trackObj),
       }
     );
     let data = await dataFetch.json();
