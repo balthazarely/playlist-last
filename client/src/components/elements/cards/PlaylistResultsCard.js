@@ -74,7 +74,7 @@ export const PlaylistResultsCard = ({ song }) => {
                     navigateToPlaylistPage(song.id);
                     e.stopPropagation();
                   }}
-                  className="text-2xl hover:text-primary block sm:hidden mr-1"
+                  className="text-2xl hover:text-primary block sm:hidden mr-1 transition duration-100"
                 />
               </button>
               <a target="BLANK" href={song.external_urls.spotify}>
