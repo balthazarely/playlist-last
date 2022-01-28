@@ -6,3 +6,5 @@ The goal of the app is to allow users to explore new music based on their listen
 
 ## Technology Used
 This project was created with React, Express, TailwindCSS/DaisyUI, Framer Motion (Animations) and the Spotify API. The app was designed and developed to optimize the user experience. The app has passed Spotify's criteria in terms of UI and development standards.
+
+Check out the live site! https://song-dive.herokuapp.com/
